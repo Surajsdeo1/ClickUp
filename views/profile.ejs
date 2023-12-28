@@ -14,8 +14,8 @@
         </div>
     </div>
     
-    <h1 class="text-3xl font-bold  text-orange-500 mt-2">Kitty Shahdeb</h1>
-    <h3 class="mt-2">@kittyshahdeb</h3>
+    <h1 class="text-3xl font-bold  text-orange-500 mt-2"><%=user.name%></h1>
+    <h3 class="mt-2">@<%=user.username%></h3>
     <a class="bg-orange-600 mt-2 px-3 py-1 rounded-lg text-xs font-semibold text-white" href="/edit"> Edit Profile</a>
     <a href="/add" class="px-3 py-1 bg-orange-600 mt-2 rounded-lg text-xs text-white">Post</a>
        
@@ -23,10 +23,10 @@
    <div class="cards flex px-10 flex-wrap gap-5 mt-3">
     <div class="card">
         <div class="w-52 h-40 bg-red-800 rounded-lg mt-2 overflow-hidden">
-            <img class="w-full h-full object-cover"  src="/images/2af9f8e6bdc0030e9b7729285721fc01.jpg" alt="monkey">
+            <img class="w-full h-full object-cover"  src="/images/uploads/<%=user?.posts[0]?.image %>" alt="mahadev">
         </div>
-        <h1 class="text-lg mt-0.5 font-semibold">All Pins</h1>
-        <h6 class="text-sm font-medium opacity-60">15 Pins</h6>
+        <a href="/show/posts" class="text-lg mt-0.5 font-semibold">your upload</a>
+        <h6 class="text-sm font-medium opacity-60"><%=user.posts.length%>pins</h6>
 
     </div>
    

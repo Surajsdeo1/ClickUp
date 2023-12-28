@@ -17,6 +17,7 @@ router.get('/register', function(req, res, next) {
 router.post('/register', async function(req,res)
 {
     const Data=new  userModel({
+      name:req.body.name,
       username:req.body.username,
       email:req.body.email,
     contact:req.body.contact
@@ -36,9 +37,23 @@ router.post('/register', async function(req,res)
  
 });
 router.get('/profile', isLoggedIn, async function(req, res, next) {
-  const user=await userModel.findOne({username:req.session.passport.user});
+  const user=await userModel.findOne({username:req.session.passport.user})
+  .populate("posts")
   res.render('profile',{user,nav:true});
 });
+router.get('/show/posts', isLoggedIn, async function(req, res, next) {
+  const user=await userModel.findOne({username:req.session.passport.user})
+  .populate("posts")
+  res.render('show',{user,nav:true});
+});
+router.get('/feed', isLoggedIn, async function(req, res, next) {
+  const user=await userModel.findOne({username:req.session.passport.user})
+  const posts=await postModel.find()
+  .populate("user")
+  res.render("feed",{user,posts,nav:true});
+});
+
+
 router.post('/fileupload', isLoggedIn,upload.single("image"),async function(req, res, next) {
  const user=await userModel.findOne({username:req.session.passport.user});
  user.profileImage=req.file.filename;
